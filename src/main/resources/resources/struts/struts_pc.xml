@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- PC网站部分配置 -->
+	<package name="pc" namespace="/" extends="interceptor" strict-method-invocation="false">
+		<!-- 为此包下的所有action应用拦截器 -->
+		<default-interceptor-ref name="pcInterceptor" />
+		<global-results>
+			<result name="error">/WEB-INF/pages/common/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+	</package>
+
+	<!-- 首页 -->
+	<package name="index" namespace="/" extends="pc" strict-method-invocation="false">
+		<action name="index" class="system.pc.action.index.indexAction" method="index">
+			<result name="index">/WEB-INF/pages/index/index.jsp</result>
+		</action>
+	</package>
+
+	<!-- 预约培训 -->
+	<package name="business" namespace="/business" extends="pc" strict-method-invocation="false">
+		<action name="*_*" class="system.pc.action.business.{2}Action" method="{1}">
+			<result>/WEB-INF/pages/business/{2}/{1}.jsp</result>
+		</action>
+
+		<!--无法再定义一个action name=*, 否则不管是*_*, 还是*_*_*, 都会匹配*, 待解决-->
+		<action name="onestop" class="system.pc.action.business.onestopAction" method="list">
+			<result>/WEB-INF/pages/business/onestop/list.jsp</result>
+		</action>
+		<action name="time" class="system.pc.action.business.timeAction" method="list">
+			<result>/WEB-INF/pages/business/time/list.jsp</result>
+		</action>
+		<action name="keer" class="system.pc.action.business.keerAction" method="list">
+			<result>/WEB-INF/pages/business/keer/list.jsp</result>
+		</action>
+	</package>
+
+</struts>

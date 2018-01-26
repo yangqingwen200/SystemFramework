@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Jboss7默认采用容器自己的log4j module, 应用自己配置的log4j不起作用, -->
+<!-- 此文件是为了解决Jboss7下面无法本使用项目logback.xml日志配置 -->
+<!-- 配置是此文件之后, Jboss7自带standalone.xml配置日志就不起作用了 -->
+<jboss-deployment-structure>
+   <deployment>
+     <exclusions>
+       <module name="org.slf4j" />
+     </exclusions>
+   </deployment>
+</jboss-deployment-structure> 
